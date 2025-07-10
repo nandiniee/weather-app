@@ -9,20 +9,26 @@
 <body>
     <div class="container">
         <div class="weather" id="weather">
-            <div class="temperature" id="temp"></div>
-            <div class="temperature" id="feelslike"></div>
-            <div class="temperature" id="desc"></div>
+            <div class="temperature" id="temp">1</div>
+            <div class="temperature" id="feelslike">2</div>
+            <div class="temperature" id="desc">3</div>
     
             <div class="location">
                 <i class="fa-solid fa-location-dot"></i>
+                4
             </div>
             <div class="time_date">
-                <span id="date"></span>
-                <span id="day"><span>
+                <span id="date">5</span>
+                <span id="day">6</span>
             </div>
         </div>
-        {{>header}}
+         <nav>
+        <form id="searchForm">
+            <input type="text" placeholder="Search for a location"/>
+            <button type="submit">Go</button>
+        </form>
+    </nav>
     </div>
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

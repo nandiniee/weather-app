@@ -11,12 +11,17 @@
     <div class="container">
         <div class="weather">
             <div class="temperature">Weather Forecast</div>
-            <div class="location">
+            <div class="locationOn">
                 Know your weather!
             </div>
         </div>
-       {{>header}}
+        <nav>
+        <form id="searchForm">
+            <input type="text" placeholder="Search for a location"/>
+            <button type="submit">Go</button>
+        </form>
+    </nav>
     </div>
 </body>
-<script src="script.js"></script>
+<script src="/script.js"></script>
 </html>
