@@ -1,10 +1,11 @@
 const request = require('request');
 const weather=(address,callback)=>{
-    const url='https://api.weatherstack.com/current?access_key=5cdc80dcbdc89c4fd67dc7fc8a7212d1&query='+address+'&units=m'
+    console.log(address);
+    
+    const url='https://api.weatherstack.com/current?access_key=dcee5e90820b6cb4b93ceaea1b1fad15&query='+address+'&units=m'
 request({url:url,json:true},(error,{body})=>{
-   if(body.success){
-     console.log(body);
-    const{temperature,feelslike,weather_descriptions}=body.current;
+    console.log(body);
+    
     if(error){
         callback('Unale to connect to the weather service!',undefined)
     }
@@ -12,15 +13,13 @@ request({url:url,json:true},(error,{body})=>{
         callback('Unable to find location. Try another search.',undefined)
     }
     else{
-
+        const{temperature,feelslike,weather_descriptions}=body.current;
         callback(undefined,{weatherDesc: weather_descriptions[0], 
             temp:temperature, 
             feels:feelslike})
+        
     }
-   }
-   else{
-    console.error("Error fetching weather data:", body.error.info);
-   }
+
 })
 }
 module.exports=weather;

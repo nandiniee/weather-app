@@ -14,7 +14,7 @@ const app=express();
 // Set up handlebars engine and views location
 app.set('views', viewsPath);  // set the views directory
 app.set('view engine','hbs');
-hbs.registerPartials(partialsPath);
+
 
 //set up static directory to serve
 app.use(express.static(publicPath));
@@ -23,37 +23,42 @@ app.get('',(req,res)=>{
     res.render('index');
 })
 
-// app.get('/weather',(req,res)=>{
-//     if(!req.query.address){
-//         return res.send({
-//             error: 'You must provide an address'
-//         });
-//     }
+app.get('/weather-data',(req,res)=>{
+    if(!req.query.address){
+        return res.send({
+            error: 'You must provide an address'
+        });
+    }
 
-//     weather(req.query.address, (error, {weatherDesc, temp, feels} = {}) => {
-//         if (error) {
-//             return res.send({ error });
-//         }
-//         if (!weatherDesc || !temp || !feels) {
-//             return res.send({
-//                 error: 'Unable to find weather for the provided address.'
-//             });
-//         }
+    weather(req.query.address, (error, {weatherDesc, temp, feels} = {}) => {
+        if (error) {
+            return res.send({ error });
+        }
+        if (!weatherDesc || !temp || !feels) {
+            return res.send({
+                error: 'Unable to find weather for the provided address.'
+            });
+        }
 
-//         res.send( {
-//             location: req.query.address,
-//             date: new Date().toLocaleDateString(),
-//             day: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
-//             temperature: temp,
-//             feelslike: feels,
-//             description: weatherDesc
-//         });
-//     });
-// })
-
-app.get('*',(req,res)=>{
-    res.send('404 Page Not Found');
+        res.send( {
+            location: req.query.address,
+            date: new Date().toLocaleDateString(),
+            day: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
+            temperature: temp,
+            feelslike: feels,
+            description: weatherDesc
+        });
+    });
+    
 })
+
+app.get('/weather',(req,res)=>{
+    res.render('weather');
+})
+
+// app.get('*',(req,res)=>{
+//     res.send('404 Page Not Found');
+// })
 
 app.listen(3000,()=>{
     console.log("server is running");
